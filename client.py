@@ -8,13 +8,20 @@ s.connect((host, port))         # Connect to sever
 
 count = 0
 while count < 5:
+
+    print("Tries left: ", 5-count)
+    wordData = s.recv(1024)
+
+    print(wordData)
+
     letter = input("Guess a letter ")
     b = letter.encode('utf-8')     # Encodes to bytes
     data = s.send(b)    # Recieves data from server
 
-    print(s.recv(1024))
-    if s.recv(1024) == b"Wrong letter":
-        print("wrong")
+    wordData2 = s.recv(1024)
+
+    if wordData2 == b"Wrong letter":
+        print("Wrong letter")
         count += 1
 
 
